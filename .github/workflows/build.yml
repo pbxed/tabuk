@@ -1,4 +1,4 @@
-name: Build
+name: CI/CD Pipeline
 on:
   push:
     branches:
@@ -6,7 +6,8 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
-  build:
+  tests:
+    name: Unit Tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -19,7 +20,6 @@ jobs:
       - name: Run Unit Tests
         run: mvn -B test
   sonar:
-    # Depends on tests job
     needs: tests
     name: SonarCloud analysis
     runs-on: ubuntu-latest
@@ -31,14 +31,14 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - name: Cache SonarCloud packages
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
         #Analyze project with SonarCloud
-        - name: Analyze with SonarCloud
-          run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=pbxed_tabuk
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Analyze with SonarCloud
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=pbxed_tabuk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
