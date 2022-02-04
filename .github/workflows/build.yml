@@ -55,7 +55,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build with Maven
-        run: mvn -B package -DskipTests --fole pom.xml
+        run: mvn -B package -DskipTests --file pom.xml
       - name: Upload Jar
         uses: actions/upload-artifact@v2
         with:
