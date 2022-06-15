@@ -24,7 +24,7 @@ class AddressControllerTest {
     @Test
     void shouldReturnOk() throws Exception {
         when(addressService.getAddresses())
-                .thenReturn(Arrays.asList(new Address(1, "123", "Fake Street", "Fake", "Fake", "FAKE", "FAKE")));
+                .thenReturn(Arrays.asList(new Address(1L, "123", "Fake Street", "Fake", "Fake", "FAKE", "FAKE")));
 
         this.mockMvc.perform(get("/api/v1/addresses"))
                 .andExpect(status().isOk());
