@@ -1,9 +1,8 @@
 package com.pbx.tabuk.address;
 
-import org.springframework.stereotype.Service;
-
-import java.util.Arrays;
 import java.util.List;
+
+import org.springframework.stereotype.Service;
 
 @Service
 public class AddressService {
@@ -15,6 +14,6 @@ public class AddressService {
     }
 
     public List<Address> getAddresses() {
-        return addressRepository.selectAddresses();
+        return addressRepository.findAll();
     }
 }
