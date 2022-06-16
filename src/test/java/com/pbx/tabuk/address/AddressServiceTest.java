@@ -25,7 +25,7 @@ class AddressServiceTest {
 
 	@Test
 	@DisplayName("Returns a list of Addresses successfully")
-	public void happyPath() {
+	void happyPath() {
 		// Given
 		var expected = Arrays.asList(
 				new Address( 1L, "123", "AddressLine1", "AddressLine2", "City", "PostCode",
