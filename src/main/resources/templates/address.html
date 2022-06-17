@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Address Page</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Address</th>
+    </tr>
+    <tr th:each="address: ${addresses}">
+        <td th:text="${address.id}"></td>
+        <td th:text="${address.houseNameOrNumber}"></td>
+    </tr>
+</table>
+</body>
+</html>

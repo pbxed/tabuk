@@ -1,0 +1,2 @@
+INSERT INTO address (HOUSE_NAME_OR_NUMBER, ADDRESS_LINE_1, ADDRESS_LINE_2, CITY, POSTCODE, COUNTRY) VALUES ('123', 'addressLine1', 'addressLine2', 'city', 'postcode', 'country');
+INSERT INTO address (HOUSE_NAME_OR_NUMBER, ADDRESS_LINE_1, ADDRESS_LINE_2, CITY, POSTCODE, COUNTRY) VALUES ('456', 'fakeaddress1', 'fakeaddress2', 'fakecity', 'fakecode', 'fakecountry');

@@ -18,8 +18,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.pbx.tabuk.exception.AddressNotFoundException;
 
-@WebMvcTest(AddressController.class)
-class AddressControllerTest {
+@WebMvcTest(AddressRestController.class)
+class AddressRestControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;

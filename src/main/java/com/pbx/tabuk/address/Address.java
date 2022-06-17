@@ -1,5 +1,6 @@
 package com.pbx.tabuk.address;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,11 +18,18 @@ public class Address {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	private Long id;
+	@Column(name = "house_name_or_number")
 	private String houseNameOrNumber;
-	String addressLine1;
-	String addressLine2;
-	String city;
-	String postcode;
-	String country;
+	@Column(name = "address_line_1")
+	private String addressLine1;
+	@Column(name = "address_line_2")
+	private String addressLine2;
+	@Column(name = "city")
+	private String city;
+	@Column(name = "postcode")
+	private String postcode;
+	@Column(name = "country")
+	private String country;
 }
