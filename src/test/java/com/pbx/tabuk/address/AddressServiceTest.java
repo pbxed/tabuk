@@ -1,11 +1,14 @@
 package com.pbx.tabuk.address;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+
+import javax.security.auth.login.AccountNotFoundException;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,6 +17,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.pbx.tabuk.exception.AddressNotFoundException;
+
 @ExtendWith(MockitoExtension.class)
 class AddressServiceTest {
 
@@ -21,25 +26,61 @@ class AddressServiceTest {
 	private AddressRepository addressRepository;
 
 	@InjectMocks
-	private AddressService cut;
+	private AddressService addressService;
 
 	@Test
 	@DisplayName("Returns a list of Addresses successfully")
 	void happyPath() {
 		// Given
-		var expected = Arrays.asList(
-				new Address( 1L, "123", "AddressLine1", "AddressLine2", "City", "PostCode",
-						"Country" ),
-				new Address( 2L, "123", "AddressLine1", "AddressLine2", "City", "PostCode",
-						"Country" ) );
+		var expected = getAddresses();
 
 		when( addressRepository.findAll() ).thenReturn( expected );
 
 		// When
-		final List<Address> actual = cut.getAddresses();
+		final List<Address> actual = addressService.getAddresses();
 
 		// Then
-		assertThat(actual).isEqualTo( expected );
+		assertThat( actual ).isEqualTo( expected );
 	}
 
+	@Test
+	@DisplayName("Returns an Address when given a valid Id")
+	void getAddressByIdGivenValidIdShouldReturnAddress() throws AccountNotFoundException {
+		var expected = getAddress();
+
+		when( addressRepository.findById( 1L ) ).thenReturn( Optional.of( expected ) );
+
+		final Address actual = addressService.getAddressById( 1L );
+
+		assertThat( actual ).isEqualTo( expected );
+
+	}
+
+	@Test
+	@DisplayName("Throws AccountNotFoundException when id does not exist")
+	void getAddressByIdWhenIdDoesNotExistShouldThrow() {
+		var expected = getAddress();
+
+		when( addressRepository.findById( 1L ) ).thenReturn( Optional.empty() );
+
+		assertThrows( AddressNotFoundException.class, () -> {
+			final Address actual = addressService.getAddressById( 1L );
+		} );
+	}
+
+	private Address getAddress() {
+		return new Address( 1L, "123", "addressLine1", "addressLine2", "city", "postcode",
+				"country" );
+	}
+
+	private List<Address> getAddresses() {
+		var addressOne = new Address( 1L, "123", "addressLine1", "addressLine2", "city", "postcode",
+				"country" );
+		var addressTwo = new Address( 2L, "456", "addressLine1", "addressLine2", "city", "postcode",
+				"country" );
+		var addressThree = new Address( 3L, "987", "addressLine1", "addressLine2", "city",
+				"postcode", "country" );
+
+		return Arrays.asList( addressOne, addressTwo, addressThree );
+	}
 }
