@@ -9,45 +9,12 @@
 <body>
 
 <div class="container">
-    <form action="#" th:action="@{/address}" th:object="${addressRequest} "method="post">
-        <div class="form-group">
-            <label for="houseNameOrNumber">House Number/Name</label>
-            <input class="form-control" id="houseNameOrNumber" placeholder="Enter House Number or Name" required
-                   th:field="*{houseNameOrNumber}"
-                   type="text"/>
-        </div>
-        <div class="form-group">
-            <label for="addressLine1">Address Line 1</label>
-            <input class="form-control" id="addressLine1" placeholder=""
-                   th:field="*{addressLine1}"
-                   type="text"/>
-        </div>
-        <div class="form-group">
-            <label for="addressLine2">Address Line 2</label>
-                <input class="form-control" id="addressLine2" placeholder=""
-                       th:field="*{addressLine2}"
-                       type="text"/>
-        </div>
-        <div class="form-group">
-            <label for="city">City</label>
-                <input class="form-control" id="city" placeholder=""
-                       th:field="*{city}"
-                       type="text"/>
-        </div>
-        <div class="form-group">
-            <label for="postcode">PostCode</label>
-                <input class="form-control" id="postcode" placeholder=""
-                       th:field="*{postcode}"
-                       type="text"/>
-        </div>
-        <div class="form-group">
-            <label for="country">Country</label>
-                <input class="form-control" id="country" placeholder=""
-                       th:field="*{country}"
-                       type="text"/>
-        </div>
-        <input class="btn btn-primary" type="submit" value="add address"/>
-    </form>
+
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAddressModal">
+        Add Address
+    </button>
+    <th:block th:replace="_modals :: modal('addAddressModal')">modal</th:block>
+
 </div>
 
 <div class="container">
@@ -61,6 +28,7 @@
     </table>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+</script>
 </body>
 </html>

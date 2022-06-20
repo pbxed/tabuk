@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<!-- Modal -->
+<div th:fragment="modal(id)" class="modal fade" th:id="${id}" tabindex="-1" role="dialog" aria-labelledby="addAddressModal"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Address</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="#" th:action="@{/address}" th:object="${addressRequest} "method="post">
+
+            <div class="modal-body";>
+                    <div class="form-group">
+                        <label for="houseNameOrNumber">House Number/Name</label>
+                        <input class="form-control" id="houseNameOrNumber" placeholder="Enter House Number or Name" required
+                               th:field="*{houseNameOrNumber}"
+                               type="text"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="addressLine1">Address Line 1</label>
+                        <input class="form-control" id="addressLine1" placeholder=""
+                               th:field="*{addressLine1}"
+                               type="text"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="addressLine2">Address Line 2</label>
+                        <input class="form-control" id="addressLine2" placeholder=""
+                               th:field="*{addressLine2}"
+                               type="text"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input class="form-control" id="city" placeholder=""
+                               th:field="*{city}"
+                               type="text"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="postcode">PostCode</label>
+                        <input class="form-control" id="postcode" placeholder=""
+                               th:field="*{postcode}"
+                               type="text"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <input class="form-control" id="country" placeholder=""
+                               th:field="*{country}"
+                               type="text"/>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input class="btn btn-primary" type="submit" value="Save"/>
+            </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
