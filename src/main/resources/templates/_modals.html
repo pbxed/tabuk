@@ -4,7 +4,8 @@
 </head>
 <body>
 <!-- Modal -->
-<div th:fragment="modal(id)" class="modal fade" th:id="${id}" tabindex="-1" role="dialog" aria-labelledby="addAddressModal"
+<div th:fragment="modal(id)" class="modal fade" th:id="${id}" tabindex="-1" role="dialog"
+     aria-labelledby="addAddressModal"
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -14,12 +15,13 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="#" th:action="@{/address}" th:object="${addressRequest} "method="post">
+            <form action="#" th:action="@{/address}" th:object="${addressRequest} " method="post">
 
-            <div class="modal-body";>
+                <div class="modal-body" ;>
                     <div class="form-group">
                         <label for="houseNameOrNumber">House Number/Name</label>
-                        <input class="form-control" id="houseNameOrNumber" placeholder="Enter House Number or Name" required
+                        <input class="form-control" id="houseNameOrNumber"
+                               placeholder="Enter House Number or Name" required
                                th:field="*{houseNameOrNumber}"
                                type="text"/>
                     </div>
@@ -53,13 +55,13 @@
                                th:field="*{country}"
                                type="text"/>
                     </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <input class="btn btn-primary" type="submit" value="Save"/>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                    </button>
+                    <input class="btn btn-primary" type="submit" value="Save"/>
+                </div>
             </form>
-
         </div>
     </div>
 </div>
