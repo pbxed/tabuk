@@ -2,7 +2,6 @@ package com.pbx.tabuk.address;
 
 import static com.pbx.tabuk.util.StringNullChecker.getNonNullStringValue;
 
-import java.util.Objects;
 import java.util.StringJoiner;
 
 import javax.persistence.Column;
@@ -10,8 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import org.springframework.util.StringUtils;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,7 +21,7 @@ import lombok.NoArgsConstructor;
 public class Address {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
 	@Column(name = "house_name_or_number")
@@ -40,7 +37,7 @@ public class Address {
 	@Column(name = "country")
 	private String country;
 
-	public String getFullFormattedAddress() {
+	public String toFullFormattedAddress() {
 		StringJoiner result = new StringJoiner( "", "", " ");
 
 		return result

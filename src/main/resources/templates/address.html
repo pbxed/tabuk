@@ -7,6 +7,49 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 <body>
+
+<div class="container">
+    <form action="#" th:action="@{/address}" th:object="${addressRequest} "method="post">
+        <div class="form-group">
+            <label for="houseNameOrNumber">House Number/Name</label>
+            <input class="form-control" id="houseNameOrNumber" placeholder="Enter House Number or Name" required
+                   th:field="*{houseNameOrNumber}"
+                   type="text"/>
+        </div>
+        <div class="form-group">
+            <label for="addressLine1">Address Line 1</label>
+            <input class="form-control" id="addressLine1" placeholder=""
+                   th:field="*{addressLine1}"
+                   type="text"/>
+        </div>
+        <div class="form-group">
+            <label for="addressLine2">Address Line 2</label>
+                <input class="form-control" id="addressLine2" placeholder=""
+                       th:field="*{addressLine2}"
+                       type="text"/>
+        </div>
+        <div class="form-group">
+            <label for="city">City</label>
+                <input class="form-control" id="city" placeholder=""
+                       th:field="*{city}"
+                       type="text"/>
+        </div>
+        <div class="form-group">
+            <label for="postcode">PostCode</label>
+                <input class="form-control" id="postcode" placeholder=""
+                       th:field="*{postcode}"
+                       type="text"/>
+        </div>
+        <div class="form-group">
+            <label for="country">Country</label>
+                <input class="form-control" id="country" placeholder=""
+                       th:field="*{country}"
+                       type="text"/>
+        </div>
+        <input class="btn btn-primary" type="submit" value="add address"/>
+    </form>
+</div>
+
 <div class="container">
     <table class="table table-hover">
         <tr>
