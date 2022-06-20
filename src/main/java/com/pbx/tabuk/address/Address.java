@@ -1,10 +1,17 @@
 package com.pbx.tabuk.address;
 
+import static com.pbx.tabuk.util.StringNullChecker.getNonNullStringValue;
+
+import java.util.Objects;
+import java.util.StringJoiner;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.springframework.util.StringUtils;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,4 +39,18 @@ public class Address {
 	private String postcode;
 	@Column(name = "country")
 	private String country;
+
+	public String getFullFormattedAddress() {
+		StringJoiner result = new StringJoiner( "", "", " ");
+
+		return result
+				.add( getNonNullStringValue( houseNameOrNumber ) )
+				.add( getNonNullStringValue( addressLine1 ) )
+				.add( getNonNullStringValue( addressLine2 ) )
+				.add( getNonNullStringValue( city ) )
+				.add( getNonNullStringValue( postcode ) )
+				.add( getNonNullStringValue( country ) )
+				.toString()
+				.trim();
+	}
 }
