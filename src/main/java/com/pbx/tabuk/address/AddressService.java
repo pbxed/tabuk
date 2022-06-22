@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.pbx.tabuk.dto.request.AddressRequest;
+import com.pbx.tabuk.dto.response.AddressResponse;
 import com.pbx.tabuk.exception.AddressNotFoundException;
 
 @Service
@@ -26,10 +27,10 @@ public class AddressService {
 						"Account with id: " + id + " not found." ) );
 	}
 
-	public void createAddress( final AddressRequest request ) {
+	public AddressResponse createAddress( final AddressRequest request ) {
 		Address address = mapAddressRequestToAddress(request);
 
-		addressRepository.save( address );
+		return mapAddressToAddressResponse(addressRepository.save( address ));
 	}
 
 	private Address mapAddressRequestToAddress( final AddressRequest request ) {
@@ -42,5 +43,18 @@ public class AddressService {
 		address.setCountry( request.getCountry() );
 
 		return address;
+	}
+
+	private AddressResponse mapAddressToAddressResponse( final Address address ){
+		AddressResponse addressResponse = new AddressResponse();
+		addressResponse.setHouseNameOrNumber( address.getHouseNameOrNumber() );
+		addressResponse.setAddressLine1( address.getAddressLine1() );
+		addressResponse.setAddressLine2( address.getAddressLine2() );
+		addressResponse.setCity( address.getCity() );
+		addressResponse.setPostcode( address.getPostcode() );
+		addressResponse.setCountry( address.getCity() );
+
+		return addressResponse;
+
 	}
 }

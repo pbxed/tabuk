@@ -11,6 +11,7 @@ import java.util.Optional;
 import javax.security.auth.login.AccountNotFoundException;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -30,7 +31,8 @@ class AddressServiceTest {
 
 	@Test
 	@DisplayName("Returns a list of Addresses successfully")
-	void happyPath() {
+	@Tag("unit")
+	void getAddressesShouldReturnListOfAddresses() {
 		// Given
 		var expected = getAddresses();
 
@@ -45,7 +47,8 @@ class AddressServiceTest {
 
 	@Test
 	@DisplayName("Returns an Address when given a valid Id")
-	void getAddressByIdGivenValidIdShouldReturnAddress() throws AccountNotFoundException {
+	@Tag("unit")
+	void getAddressByIdGivenValidIdShouldReturnAddress() {
 		var expected = getAddress();
 
 		when( addressRepository.findById( 1L ) ).thenReturn( Optional.of( expected ) );
@@ -58,6 +61,7 @@ class AddressServiceTest {
 
 	@Test
 	@DisplayName("Throws AccountNotFoundException when id does not exist")
+	@Tag("unit")
 	void getAddressByIdWhenIdDoesNotExistShouldThrow() {
 		var expected = getAddress();
 
