@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.pbx.tabuk.converter.AddressRequestConverter;
+import com.pbx.tabuk.converter.AddressResponseConverter;
 import com.pbx.tabuk.dto.request.AddressRequest;
 import com.pbx.tabuk.dto.response.AddressResponse;
 import com.pbx.tabuk.exception.AddressNotFoundException;
@@ -28,33 +30,13 @@ public class AddressService {
 	}
 
 	public AddressResponse createAddress( final AddressRequest request ) {
-		Address address = mapAddressRequestToAddress(request);
+		var addressRequestConverter = new AddressRequestConverter();
+		var addressResponseConverter = new AddressResponseConverter();
 
-		return mapAddressToAddressResponse(addressRepository.save( address ));
-	}
+		final Address address = addressRequestConverter.convertFromDto( request );
 
-	private Address mapAddressRequestToAddress( final AddressRequest request ) {
-		Address address = new Address();
-		address.setHouseNameOrNumber( request.getHouseNameOrNumber() );
-		address.setAddressLine1( request.getAddressLine1() );
-		address.setAddressLine2( request.getAddressLine2() );
-		address.setCity( request.getCity() );
-		address.setPostcode( request.getPostcode() );
-		address.setCountry( request.getCountry() );
+		final Address save = addressRepository.save( address );
 
-		return address;
-	}
-
-	private AddressResponse mapAddressToAddressResponse( final Address address ){
-		AddressResponse addressResponse = new AddressResponse();
-		addressResponse.setHouseNameOrNumber( address.getHouseNameOrNumber() );
-		addressResponse.setAddressLine1( address.getAddressLine1() );
-		addressResponse.setAddressLine2( address.getAddressLine2() );
-		addressResponse.setCity( address.getCity() );
-		addressResponse.setPostcode( address.getPostcode() );
-		addressResponse.setCountry( address.getCity() );
-
-		return addressResponse;
-
+		return addressResponseConverter.convertFromEntity( save );
 	}
 }
